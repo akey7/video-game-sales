@@ -61,3 +61,14 @@ sales_plot_df <- sales_df |>
 ggplot(sales_plot_df, aes(x = release_year, y = sum_sales, color = region)) +
   geom_line()
 ```
+
+```{r}
+#| label: drop-sales-nas
+#| include: true
+#| eval: true
+
+sales_df |>
+  select(title, console, genre, total_sales, pal_sales, jp_sales, na_sales, other_sales) |>
+  drop_na() |>
+  write_csv(here("output", "vgchartz-2024-no-sales-nas.csv"), na = "")
+```

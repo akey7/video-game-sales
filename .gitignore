@@ -62,3 +62,7 @@ output/
 *.woff
 *.zip
 *.svg
+
+# Other random stuff
+*.Rproj
+.DS_Store

@@ -54,8 +54,9 @@ sales_plot_df <- sales_df |>
   filter(release_year %in% interesting_years) |>
   pivot_longer(-release_year, names_to = "region", values_to = "sales") |>
   group_by(release_year, region) |>
-  summarize(sum_sales = sum(sales, na.rm = TRUE)) |>
+  summarize(sum_sales = sum(sales, na.rm = TRUE), .groups = "drop") |>
   arrange(release_year)
 
-head(sales_plot_df)
+ggplot(sales_plot_df, aes(x = release_year, y = sum_sales, color = region)) +
+  geom_line()
 ```

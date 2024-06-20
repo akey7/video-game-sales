@@ -29,7 +29,8 @@ Load the data and clean the names
 
 sales_df <- read_csv(here("input", "vgchartz-2024.csv"), show_col_types = FALSE) |>
   select(-img) |>
-  clean_names()
+  clean_names() |>
+  drop_na()
 
 head(sales_df)
 ```

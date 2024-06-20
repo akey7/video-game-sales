@@ -14,6 +14,7 @@ library(tidyr)
 library(readr)
 library(janitor)
 library(ggplot2)
+library(lubridate)
 library(here)
 ```
 
@@ -26,9 +27,35 @@ Load the data and clean the names
 #| eval: true
 #| include: true
 
-sales_df <- read_csv(here("input", "vgchartz-2024.csv")) |>
+sales_df <- read_csv(here("input", "vgchartz-2024.csv"), show_col_types = FALSE) |>
   select(-img) |>
   clean_names()
 
 head(sales_df)
+```
+
+## Sales by region by year 2010-2023
+
+```{r}
+#| label: sales-by-region-by-year
+#| eval: true
+#| include: true
+
+interesting_years = 2010:2023
+
+sales_plot_df <- sales_df |>
+  transmute(
+    na_sales,
+    jp_sales,
+    pal_sales,
+    other_sales,
+    release_year = year(release_date)
+  ) |>
+  filter(release_year %in% interesting_years) |>
+  pivot_longer(-release_year, names_to = "region", values_to = "sales") |>
+  group_by(release_year, region) |>
+  summarize(sum_sales = sum(sales, na.rm = TRUE)) |>
+  arrange(release_year)
+
+head(sales_plot_df)
 ```

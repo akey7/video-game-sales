@@ -47,3 +47,18 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Input data and output products
+input/
+output/
+
+# Ignore other stray data and build artifacts
+*.html
+*.csv
+*.Rds
+*.png
+*.js
+*.css
+*.woff
+*.zip
+*.svg

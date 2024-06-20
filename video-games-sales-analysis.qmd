@@ -1,0 +1,34 @@
+---
+title: "Video Game Sales Analysis"
+format: html
+editor: source
+---
+
+```{r}
+#| label: load-libraries
+#| eval: true
+#| include: false
+
+library(dplyr)
+library(tidyr)
+library(readr)
+library(janitor)
+library(ggplot2)
+library(here)
+```
+
+## Load the data
+
+Load the data and clean the names
+
+```{r}
+#| label: read-data
+#| eval: true
+#| include: true
+
+sales_df <- read_csv(here("input", "vgchartz-2024.csv")) |>
+  select(-img) |>
+  clean_names()
+
+head(sales_df)
+```
